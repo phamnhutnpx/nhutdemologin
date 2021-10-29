@@ -4,11 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Nhut demo login</title>
 </head>
 
 <body>
     <h1>XIN CHÀO! TÔI MUỐN ĐĂNG NHẬP BẰNG FACEBOOK</h1>
+
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '489501709008755',
+                cookie: true,
+                xfbml: true,
+                version: 'v12.0'
+            });
+
+
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function statusChangeCallback(response) {
+            if (response.status === 'connected') {
+                console.log('Đăng nhập qua facebook thành công');
+            } else {
+                console.log('Đăng nhập qua facebook thất bại');
+            }
+        }
+
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        }
+    </script>
+
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
 </body>
 
 </html>
